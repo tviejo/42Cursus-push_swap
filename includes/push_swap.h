@@ -6,8 +6,14 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 11:48:22 by tviejo            #+#    #+#             */
-/*   Updated: 2024/04/07 11:48:24 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/15 17:23:39 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
+# include <stdio.h>
+# include <stdlib.h>
+
+#endif
