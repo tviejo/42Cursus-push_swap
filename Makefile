@@ -1,6 +1,5 @@
 NAME		=	push_swap
 
-
 SRC_DIR		=	srcs/
 
 OBJ_DIR         =       objs/
@@ -17,7 +16,7 @@ CC		=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-INCLUDES	= 	-I/includes/push_swap.h
+INCLUDES    =     includes/
 
 RM		=	rm -f
 
@@ -25,28 +24,46 @@ ifeq ($(debug), true)
 	CFLAGS += -g3 -fsanitize=address,undefined
 endif
 
+ifndef ECHO
+T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
+      -nrRf $(firstword $(MAKEFILE_LIST)) \
+      ECHO="COUNTTHIS" | grep -c "COUNTTHIS")
+
+N := x
+C = $(words $N)$(eval N := x $N)
+ECHO = echo "`expr " [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
+endif
+
 all:                    ${NAME}
 						@$(ECHO) All done
 
 ${NAME}:                ${OBJS}
+				$(ECHO) Compiling LIBFT
 				$(MAKE) -C ./libft/
-				$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) 
+				$(CC) $(CFLAGS) -I $(INCLUDES) $(OBJS) -o $(NAME) 
 				
 
 $(OBJS):                $(OBJ_DIR)%.o: %.c
+				$(ECHO) Compiling $@
 				mkdir -p $(OBJ_DIR)
 				mkdir -p objs/List/
 				mkdir -p objs/Main/
 				mkdir -p objs/Sort/
-				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
+				$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ 
 
 clean:
 			$(RM) -r $(OBJ_DIR)
 			${RM} ${OBJS} ${BOBJS}
+			@$(ECHO) Clean libft
+			$(MAKE) clean -C ./libft/
+			@$(ECHO) Clean done
 
 fclean:			clean
 				${RM} ${NAME}
+				@$(ECHO) Fclean libft
+				@$(ECHO) Fclean done
 
 re:				fclean all
 
 .PHONY:			all clean fclean re
+.SILENT:
