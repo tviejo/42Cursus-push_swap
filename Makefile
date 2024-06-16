@@ -16,9 +16,18 @@ CC		=	cc
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-INCLUDES    =     includes/
+LIB = libft/libft.a
+
+INCLUDES = -I includes/ -I libft/includes/
 
 RM		=	rm -f
+
+GREEN=\033[0;32m
+RED=\033[0;31m
+BLUE=\033[0;34m
+END=\033[0m
+BOLD_START=\e[1m
+BOLD_END=\e[0m
 
 ifeq ($(debug), true)
 	CFLAGS += -g3 -fsanitize=address,undefined
@@ -31,37 +40,49 @@ T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
 
 N := x
 C = $(words $N)$(eval N := x $N)
-ECHO = echo "`expr " [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
+ECHO = echo "`expr "\r [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
 endif
 
-all:                    ${NAME}
-						@$(ECHO) All done
+define PRINT_LOADING
+	@printf "$(GREEN)Compiling libft["
+	@for i in $(shell seq 0 10 100); do \
+		printf "▓"; \
+		sleep 0.1; \
+	done
+	@printf "] 100%%$(RESET)\n$(END)"
+endef
 
-${NAME}:                ${OBJS}
-				$(ECHO) Compiling LIBFT
-				$(MAKE) -C ./libft/
-				$(CC) $(CFLAGS) -I $(INCLUDES) $(OBJS) -o $(NAME) 
-				
+all:                    ${NAME} libft
+						$(ECHO) "$(GREEN)$(BOLD_START)${NAME} created$(BOLD_END)$(END)"
+
+
+
+${NAME}:                 ${OBJS}
+				@$(PRINT_LOADING)
+				$(MAKE) --no-print-directory -C libft/
+				$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 $(OBJS):                $(OBJ_DIR)%.o: %.c
-				$(ECHO) Compiling $@
+				$(ECHO) "$(BLUE)Compiling: $@ $(END)"
+				$(LIBFT)
 				mkdir -p $(OBJ_DIR)
 				mkdir -p objs/List/
 				mkdir -p objs/Main/
 				mkdir -p objs/Sort/
-				$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@ 
+				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 			$(RM) -r $(OBJ_DIR)
 			${RM} ${OBJS} ${BOBJS}
-			@$(ECHO) Clean libft
-			$(MAKE) clean -C ./libft/
-			@$(ECHO) Clean done
+			@$(ECHO) "$(RED)Clean libft$(END)"
+			$(MAKE) --no-print-directory clean -C ./libft/
+			@$(ECHO) "$(GREEN)$(BOLD_START)Clean done$(BOLD_END)$(END)"
 
 fclean:			clean
 				${RM} ${NAME}
-				@$(ECHO) Fclean libft
-				@$(ECHO) Fclean done
+				@$(ECHO) "$(RED)Fclean libft$(END)"
+				$(MAKE) --no-print-directory fclean -C ./libft/
+				@$(ECHO) "$(GREEN)$(BOLD_START)Fclean done$(BOLD_END)$(END)"
 
 re:				fclean all
 
