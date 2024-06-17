@@ -6,7 +6,7 @@ OBJ_DIR         =       objs/
  
 SRCS		=	List/push.c List/rotate.c List/rrotate.c List/swap.c \
 				Main/main.c \
-				Sort/sort.c 
+				Sort/sort.c Sort/utils.c
 
 vpath %.c $(SRC_DIR)
 

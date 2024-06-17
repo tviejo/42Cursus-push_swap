@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:48:02 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/16 19:12:42 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/16 22:58:44 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,26 @@ int		ft_check_argument(int argc, char **argv)
 	}
 	return (0);
 }
+
+int ft_is_duplicate(t_stack *stacks)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		j = i + 1;
+		while (j < stacks->size_a)
+		{
+			if (stacks->a[i] == stacks->a[j])
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 int	main(int argc, char **argv)
 {
 	t_stack	stacks;
@@ -80,23 +100,9 @@ int	main(int argc, char **argv)
 	if (argc < 2 || ft_check_argument(argc, argv) == -1)
 		return (ft_putendl_fd("Invalide argument", STDERR_FILENO), -1);
 	init_stacks(&stacks, argc - 1, argv);
-	ft_print_stacks(&stacks);
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	ft_pb(&stacks);
-	ft_print_stacks(&stacks);
-	ft_rra(stacks);
-	ft_print_stacks(&stacks);
-	ft_rra(stacks);
-	ft_print_stacks(&stacks);
-	ft_rra(stacks);
-	ft_print_stacks(&stacks);
-	ft_rrb(stacks);
-	ft_print_stacks(&stacks);
-	ft_rrb(stacks);
-	ft_print_stacks(&stacks);
-	ft_rrb(stacks);
-	ft_print_stacks(&stacks);
+	if (ft_is_duplicate(&stacks) == -1)
+		return (ft_putendl_fd("Duplicate argument", STDERR_FILENO), -1);
+	ft_sort(&stacks);
 	ft_free_stacks(&stacks);
 	return (0);
 }

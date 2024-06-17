@@ -6,13 +6,13 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:47:41 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/16 19:04:06 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/16 19:40:40 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void    ft_rrotate(t_stack stack, char c)
+void    ft_rrotate(t_stack *stack, char c)
 {
     int tmp;
     int i;
@@ -20,39 +20,39 @@ void    ft_rrotate(t_stack stack, char c)
     i = 0;
     if (c == 'a')
     {
-        tmp = stack.a[stack.size_a - 1];
-        while (i < stack.size_a)
+        tmp = stack->a[stack->size_a - 1];
+        while (i < stack->size_a)
         {
-            stack.a[stack.size_a - i] = stack.a[stack.size_a - i - 1];
+            stack->a[stack->size_a - i] = stack->a[stack->size_a - i - 1];
             i++;
         }
-        stack.a[0] = tmp;
+        stack->a[0] = tmp;
     }
     else
     {
-        tmp = stack.b[stack.size_b - 1];
-        while (i < stack.size_b)
+        tmp = stack->b[stack->size_b - 1];
+        while (i < stack->size_b)
         {
-            stack.b[stack.size_b - i] = stack.b[stack.size_b - i - 1];
+            stack->b[stack->size_b - i] = stack->b[stack->size_b - i - 1];
             i++;
         }
-        stack.b[0] = tmp;
+        stack->b[0] = tmp;
     }
 }
 
-void ft_rra(t_stack stack)
+void ft_rra(t_stack *stack)
 {
     ft_rrotate(stack, 'a');
     ft_putendl_fd("rra", 1);
 }
 
-void ft_rrb(t_stack stack)
+void ft_rrb(t_stack *stack)
 {
     ft_rrotate(stack, 'b');
     ft_putendl_fd("rrb", 1);
 }
 
-void ft_rrr(t_stack stack)
+void ft_rrr(t_stack *stack)
 {
     ft_rrotate(stack, 'a');
     ft_rrotate(stack, 'b');
