@@ -32,11 +32,11 @@ int    ft_nb_rrb(t_stack *stack)
     return (i);
 }
 
-int    ft_nb_move_temp_rb(t_stack *stack, int i)
+int    ft_nb_move_temp_rb(t_stack *stack, int i, int imax)
 {
     t_stack temp;
     temp = create_temp_stack(stack);
-    while (ft_is_good(&temp) != 0 && i < 50)
+    while (ft_is_good(&temp) != 0 && i < 50 && i <= imax)
     {
         ft_rb(&temp, 0);
         i++;
@@ -47,12 +47,12 @@ int    ft_nb_move_temp_rb(t_stack *stack, int i)
 
 
 
-int    ft_nb_move_temp_rrb(t_stack *stack, int i)
+int    ft_nb_move_temp_rrb(t_stack *stack, int i, int imax)
 {
     t_stack temp;
 
     temp = create_temp_stack(stack);
-    while (ft_is_good(&temp) != 0 && i < 50)
+    while (ft_is_good(&temp) != 0 && i < 50 && i <= imax)
     {
         ft_rrb(&temp, 0);
         i++;
