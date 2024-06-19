@@ -6,7 +6,8 @@ OBJ_DIR         =       objs/
  
 SRCS		=	List/push.c List/rotate.c List/rrotate.c List/swap.c \
 				Main/main.c \
-				Sort/sort.c Sort/utils.c
+				Sort/sort.c Sort/utils.c Sort/utils2.c Sort/nb_move_a.c Sort/nb_move_b.c \
+				Sort/nb_move_a_temp.c Sort/nb_move_b_temp.c Sort/nb_move_rr.c
 
 vpath %.c $(SRC_DIR)
 
@@ -14,7 +15,7 @@ OBJS		=	$(patsubst %.c, $(OBJ_DIR)%.o, $(SRCS))
 
 CC		=	cc
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-g3 -Wall -Wextra -Werror
 
 LIB = libft/libft.a
 

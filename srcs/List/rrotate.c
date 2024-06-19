@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:47:41 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/16 19:40:40 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:38:37 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    ft_rrotate(t_stack *stack, char c)
     int tmp;
     int i;
 
-    i = 0;
+    i = 1;
     if (c == 'a')
     {
         tmp = stack->a[stack->size_a - 1];
@@ -40,21 +40,24 @@ void    ft_rrotate(t_stack *stack, char c)
     }
 }
 
-void ft_rra(t_stack *stack)
+void ft_rra(t_stack *stack, int mode)
 {
     ft_rrotate(stack, 'a');
-    ft_putendl_fd("rra", 1);
+    if (mode == 1)
+        ft_putendl_fd("rra", 1);
 }
 
-void ft_rrb(t_stack *stack)
+void ft_rrb(t_stack *stack, int mode)
 {
     ft_rrotate(stack, 'b');
-    ft_putendl_fd("rrb", 1);
+    if (mode == 1)
+        ft_putendl_fd("rrb", 1);
 }
 
-void ft_rrr(t_stack *stack)
+void ft_rrr(t_stack *stack, int mode)
 {
     ft_rrotate(stack, 'a');
     ft_rrotate(stack, 'b');
-    ft_putendl_fd("rrr", 1);
+    if (mode == 1)
+        ft_putendl_fd("rrr", 1);
 }

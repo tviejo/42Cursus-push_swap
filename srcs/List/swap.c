@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:47:50 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/16 19:41:21 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:39:00 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,24 @@ void    ft_swap(t_stack *stack, char c)
     }
 }
 
-void ft_sa(t_stack *stack)
+void ft_sa(t_stack *stack, int mode)
 {
     ft_swap(stack, 'a');
-    ft_putendl_fd("sa", 1);
+    if (mode == 1)
+        ft_putendl_fd("sa", 1);
 }
 
-void ft_sb(t_stack *stack)
+void ft_sb(t_stack *stack, int mode)
 {
     ft_swap(stack, 'b');
-    ft_putendl_fd("sb\n", 1);
+    if (mode == 1)
+        ft_putendl_fd("sb", 1);
 }
 
-void ft_swap_ss(t_stack *stack)
+void ft_ss(t_stack *stack, int mode)
 {
     ft_swap(stack, 'a');
     ft_swap(stack, 'b');
-    ft_putendl_fd("ss", 1);
+    if (mode == 1)
+        ft_putendl_fd("ss", 1);
 }
