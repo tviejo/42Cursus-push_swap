@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 11:48:22 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/20 16:21:11 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/20 16:48:21 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ void		ft_sort_five_a(t_stack *stack);
 int			ft_max_moove(t_stack *stacks);
 void		ft_init_moove(t_stack *stacks);
 void		ft_free_split(char **str);
+int			ft_check_argument(int argc, char **argv);
+int			ft_is_duplicate(t_stack *stacks);
+int			ft_init(int argc, char **argv, t_stack *stacks);
 
 #endif

@@ -1,17 +1,26 @@
 NAME		=	push_swap
 
+NAME_BONUS	=	checker
+
 SRC_DIR		=	srcs/
 
 OBJ_DIR         =       objs/
  
 SRCS		=	List/push.c List/rotate.c List/rrotate.c List/swap.c \
-				Main/main.c Main/init_stacks.c\
+				Main/init_stacks.c Main/check_main.c\
 				Sort/sort.c Sort/utils.c Sort/utils2.c Sort/nb_move_a.c Sort/nb_move_b.c \
 				Sort/nb_move_a_temp.c Sort/nb_move_b_temp.c Sort/nb_move_rr.c Sort/special_sort.c
+ifneq ($(MAKECMDGOALS), bonus)
+	SRCS += Main/main.c
+endif
+
+SRCS_BONUS	=	Main/main_bonus.c
 
 vpath %.c $(SRC_DIR)
 
 OBJS		=	$(patsubst %.c, $(OBJ_DIR)%.o, $(SRCS))
+
+OBJS_BONUS	=	$(patsubst %.c, $(OBJ_DIR)%.o, $(SRCS_BONUS))	
 
 CC		=	cc
 
@@ -56,12 +65,27 @@ endef
 all:                    ${NAME} libft
 						$(ECHO) "$(GREEN)$(BOLD_START)${NAME} created$(BOLD_END)$(END)"
 
+bonus:				  ${NAME_BONUS} libft
+						$(ECHO) "$(GREEN)$(BOLD_START)${NAME_BONUS} created$(BOLD_END)$(END)"
 
+${NAME_BONUS}:			${OBJS} $(OBJS_BONUS)
+						@$(PRINT_LOADING)
+						$(MAKE) --no-print-directory -C libft/
+						$(CC) $(CFLAGS) ${OBJS} $(OBJS_BONUS) $(LIB) -o $(NAME_BONUS)
 
 ${NAME}:                 ${OBJS}
 				@$(PRINT_LOADING)
 				$(MAKE) --no-print-directory -C libft/
 				$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+
+$(OBJS_BONUS): 			  $(OBJ_DIR)%.o: %.c
+				$(ECHO) "$(BLUE)Compiling: $@ $(END)"
+				$(LIBFT)
+				mkdir -p $(OBJ_DIR)
+				mkdir -p objs/List/
+				mkdir -p objs/Main/
+				mkdir -p objs/Sort/
+				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJS):                $(OBJ_DIR)%.o: %.c
 				$(ECHO) "$(BLUE)Compiling: $@ $(END)"
@@ -80,7 +104,7 @@ clean:
 			@$(ECHO) "$(GREEN)$(BOLD_START)Clean done$(BOLD_END)$(END)"
 
 fclean:			clean
-				${RM} ${NAME}
+				${RM} ${NAME} ${NAME_BONUS}
 				@$(ECHO) "$(RED)Fclean libft$(END)"
 				$(MAKE) --no-print-directory fclean -C ./libft/
 				@$(ECHO) "$(GREEN)$(BOLD_START)Fclean done$(BOLD_END)$(END)"

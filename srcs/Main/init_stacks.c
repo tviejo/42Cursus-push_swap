@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:33:25 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/20 16:20:41 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/20 16:54:18 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	init_stacks(t_stack *stacks, int size, char **argv)
 			ft_putendl_fd("Error", STDERR_FILENO);
 			return (ft_free_stacks(stacks), exit(-1), -1);
 		}
+		i++;
 	}
 	return (0);
 }
