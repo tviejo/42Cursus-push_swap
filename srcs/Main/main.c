@@ -6,16 +6,16 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 17:48:02 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/19 21:32:53 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/20 16:20:12 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		ft_check_argument(int argc, char **argv)
+int	ft_check_argument(int argc, char **argv)
 {
-	int 		i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < argc)
@@ -34,10 +34,10 @@ int		ft_check_argument(int argc, char **argv)
 	return (0);
 }
 
-int ft_is_duplicate(t_stack *stacks)
+int	ft_is_duplicate(t_stack *stacks)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < stacks->size_a)
@@ -56,34 +56,43 @@ int ft_is_duplicate(t_stack *stacks)
 
 int	ft_init(int argc, char **argv, t_stack *stacks)
 {
-	char **words;
-	int	nbword;
+	char	**words;
+	int		nbword;
 
 	if (argc == 2)
 	{
 		words = ft_split(argv[1], ' ');
 		nbword = ft_count_words(argv[1], ' ');
+		if (nbword == 0)
+			return (ft_putendl_fd("Error", STDERR_FILENO), exit(-1), -1);
+		if (nbword == 1)
+			return (ft_free_split(words), exit(0), 0);
 		if (ft_check_argument(nbword, words) == -1)
-			return (ft_putendl_fd("Invalide argument", STDERR_FILENO), -1);
+			return (ft_putendl_fd("Error", STDERR_FILENO), exit(-1), -1);
 		init_stacks(stacks, nbword, words);
 	}
 	else
 	{
 		if (ft_check_argument(argc - 1, &argv[1]) == -1)
-			return (ft_putendl_fd("Invalide argument", STDERR_FILENO), -1);
+			return (ft_putendl_fd("Error", STDERR_FILENO), exit(-1), -1);
 		init_stacks(stacks, argc - 1, &argv[1]);
 	}
 	return (0);
 }
+
 int	main(int argc, char **argv)
 {
 	t_stack	stacks;
 
 	if (argc == 1)
-		return (ft_putendl_fd("No argument", STDERR_FILENO), -1);
+		return (-1);
 	ft_init(argc, argv, &stacks);
 	if (ft_is_duplicate(&stacks) == -1)
-		return (ft_putendl_fd("Duplicate argument", STDERR_FILENO), -1);
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		ft_free_stacks(&stacks);
+		return (-1);
+	}
 	ft_sort(&stacks);
 	ft_free_stacks(&stacks);
 	return (0);

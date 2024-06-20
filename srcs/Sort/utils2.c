@@ -1,79 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tviejo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/20 15:33:00 by tviejo            #+#    #+#             */
+/*   Updated: 2024/06/20 15:33:02 by tviejo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int ft_is_smallest_a(t_stack *stacks)
+int	ft_is_smallest_a(t_stack *stacks)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < stacks->size_a)
-    {
-        if (stacks->a[i] < stacks->a[0])
-            return (-1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		if (stacks->a[i] < stacks->a[0])
+			return (-1);
+		i++;
+	}
+	return (0);
 }
 
-int find_largest_stack_b(t_stack *stacks)
+int	find_largest_stack_b(t_stack *stacks)
 {
-    int i;
-    int max;
+	int	i;
+	int	max;
 
-    max = INT_MIN;
-    i = 0;
-    while (i < stacks->size_b)
-    {
-        if (stacks->b[i] > max)
-            max = stacks->b[i];
-        i++;
-    }
-    return (max);
+	max = INT_MIN;
+	i = 0;
+	while (i < stacks->size_b)
+	{
+		if (stacks->b[i] > max)
+			max = stacks->b[i];
+		i++;
+	}
+	return (max);
 }
 
-int find_smallest_stack_b(t_stack *stacks)
+int	find_smallest_stack_b(t_stack *stacks)
 {
-    int i;
-    int min;
+	int	i;
+	int	min;
 
-    min = INT_MAX;
-    i = 0;
-    while (i < stacks->size_b)
-    {
-        if (stacks->b[i] < min)
-            min = stacks->b[i];
-        i++;
-    }
-    return (min);
+	min = INT_MAX;
+	i = 0;
+	while (i < stacks->size_b)
+	{
+		if (stacks->b[i] < min)
+			min = stacks->b[i];
+		i++;
+	}
+	return (min);
 }
 
-int find_largest_stack_a(t_stack *stacks)
+int	find_largest_stack_a(t_stack *stacks)
 {
-    int i;
-    int max;
+	int	i;
+	int	max;
 
-    max = INT_MIN;
-    i = 0;
-    while (i < stacks->size_a)
-    {
-        if (stacks->a[i] > max)
-            max = stacks->a[i];
-        i++;
-    }
-    return (max);
+	max = INT_MIN;
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		if (stacks->a[i] > max)
+			max = stacks->a[i];
+		i++;
+	}
+	return (max);
 }
 
-int find_smallest_stack_a(t_stack *stacks)
+int	find_smallest_stack_a(t_stack *stacks)
 {
-    int i;
-    int min;
+	int	i;
+	int	min;
 
-    min = INT_MAX;
-    i = 0;
-    while (i < stacks->size_a)
-    {
-        if (stacks->a[i] < min)
-            min = stacks->a[i];
-        i++;
-    }
-    return (min);
+	min = INT_MAX;
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		if (stacks->a[i] < min)
+			min = stacks->a[i];
+		i++;
+	}
+	return (min);
 }

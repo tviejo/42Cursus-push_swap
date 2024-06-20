@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/20 15:33:25 by tviejo            #+#    #+#             */
+/*   Updated: 2024/06/20 16:20:41 by tviejo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int	init_stacks(t_stack *stacks, int size ,char **argv)
+int	init_stacks(t_stack *stacks, int size, char **argv)
 {
 	int	i;
-	stacks->a = ft_calloc(sizeof(int) , size + 1);
+
+	stacks->a = ft_calloc(sizeof(int), size + 1);
 	if (stacks->a == NULL)
 		return (free(stacks), -1);
-	stacks->b = ft_calloc(sizeof(int) , size + 1);
+	stacks->b = ft_calloc(sizeof(int), size + 1);
 	if (stacks->b == NULL)
 		return (free(stacks), -1);
 	stacks->size_a = size;
@@ -14,17 +27,20 @@ int	init_stacks(t_stack *stacks, int size ,char **argv)
 	i = 0;
 	while (i < size)
 	{
-		if (ft_atol(argv[i]) > 0 && ft_atol(argv[i]) <= INT_MAX)
+		if (ft_atol(argv[i]) >= 0 && ft_atol(argv[i]) <= INT_MAX)
 			stacks->a[i] = ft_atol(argv[i]);
 		else
-			return (ft_putendl_fd("Error", STDERR_FILENO), -1);
-		i++;
+		{
+			ft_putendl_fd("Error", STDERR_FILENO);
+			return (ft_free_stacks(stacks), exit(-1), -1);
+		}
 	}
 	return (0);
 }
-void ft_print_stacks(t_stack *stacks)
+
+void	ft_print_stacks(t_stack *stacks)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_printf("\n\n");
@@ -33,7 +49,6 @@ void ft_print_stacks(t_stack *stacks)
 		ft_printf("%d    %d\n", stacks->a[i], stacks->b[i]);
 		i++;
 	}
-	
 }
 
 void	ft_free_stacks(t_stack *stacks)
