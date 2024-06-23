@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tviejo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 17:59:49 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/20 17:59:51 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/21 13:24:27 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (-1);
 	ft_init(argc, argv, &stacks);
-	if (ft_is_duplicate(&stacks) == -1)
-	{
-		ft_putendl_fd("Error", STDERR_FILENO);
-		ft_free_stacks(&stacks);
-		return (-1);
-	}
 	ft_read_arg(&stacks);
-	ft_print_stacks(&stacks);
 	ft_free_stacks(&stacks);
 	return (0);
 }

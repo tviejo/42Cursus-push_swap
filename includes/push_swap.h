@@ -6,7 +6,7 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 11:48:22 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/20 16:48:21 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/21 12:00:16 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			ft_nb_rrb_top(t_stack *stack);
 int			ft_nb_ra_top(t_stack *stack);
 int			ft_nb_rb_top(t_stack *stack);
 void		ft_find_fastest_b(t_stack *stack);
-int			init_stacks(t_stack *stacks, int size, char **argv);
+int			init_stacks(t_stack *stacks, int size, char **argv, int mode);
 void		ft_print_stacks(t_stack *stacks);
 void		ft_free_stacks(t_stack *stacks);
 t_stack		create_temp_stack(t_stack *stacks);

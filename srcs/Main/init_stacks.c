@@ -6,16 +6,14 @@
 /*   By: tviejo <tviejo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:33:25 by tviejo            #+#    #+#             */
-/*   Updated: 2024/06/20 16:54:18 by tviejo           ###   ########.fr       */
+/*   Updated: 2024/06/23 13:25:41 by tviejo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	init_stacks(t_stack *stacks, int size, char **argv)
+static int	init_size_stack(t_stack *stacks, int size)
 {
-	int	i;
-
 	stacks->a = ft_calloc(sizeof(int), size + 1);
 	if (stacks->a == NULL)
 		return (free(stacks), -1);
@@ -24,18 +22,33 @@ int	init_stacks(t_stack *stacks, int size, char **argv)
 		return (free(stacks), -1);
 	stacks->size_a = size;
 	stacks->size_b = 0;
-	i = 0;
-	while (i < size)
+	return (0);
+}
+
+int	init_stacks(t_stack *stack, int size, char **argv, int mode)
+{
+	int	i;
+
+	init_size_stack(stack, size);
+	i = -1;
+	while (++i < size)
 	{
-		if (ft_atol(argv[i]) >= 0 && ft_atol(argv[i]) <= INT_MAX)
-			stacks->a[i] = ft_atol(argv[i]);
+		if (ft_atol(argv[i]) >= INT_MIN && ft_atol(argv[i]) <= INT_MAX)
+			stack->a[i] = ft_atol(argv[i]);
 		else
 		{
-			ft_putendl_fd("Error", STDERR_FILENO);
-			return (ft_free_stacks(stacks), exit(-1), -1);
+			if (mode == 2)
+				ft_free_split(argv);
+			ft_putendl_fd("Error", 2);
+			return (ft_free_stacks(stack), exit(-1), -1);
 		}
-		i++;
 	}
+	if (mode == 2)
+		ft_free_split(argv);
+	if (size <= 1)
+		return (ft_free_stacks(stack), exit(-1), -1);
+	if (ft_is_duplicate(stack) == -1)
+		return (ft_putendl_fd("Error", 2), ft_free_stacks(stack), exit(-1), -1);
 	return (0);
 }
 
